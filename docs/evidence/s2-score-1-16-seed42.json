@@ -1,0 +1,327 @@
+{
+ "kind": "s2-template-score",
+ "matcher": "onset within half a 1/16 step, greedy nearest, 1:1",
+ "quantize": "1/16",
+ "rows": [
+  {
+   "case": "remember",
+   "template": "hitech-ref-remember",
+   "start": 200.0,
+   "length": 30.0,
+   "bpm": 175,
+   "quantize": "1/16",
+   "seed": 42,
+   "wallSeconds": 12.97,
+   "serviceMidi": "D:\\AIcore-coord-scratch\\s2\\final\\remember\\transcription.mid",
+   "serviceMidiSha256": "60871e10e3b950ef63ef98e9d1c1e7b87cfa3e28721cdb6cd2d8e76c3105034f",
+   "parts": {
+    "kick": {
+     "service": {
+      "true": 77,
+      "made": 82,
+      "recall": 0.805,
+      "precision": 0.756,
+      "f1": 0.78,
+      "pitchExact": 1.0,
+      "pitchClass": 1.0
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 77,
+      "made": 82,
+      "recall": 0.792,
+      "precision": 0.744,
+      "f1": 0.767,
+      "pitchExact": 1.0,
+      "pitchClass": 1.0
+     },
+     "baselinePpq": 480
+    },
+    "bass": {
+     "service": {
+      "true": 225,
+      "made": 185,
+      "recall": 0.551,
+      "precision": 0.67,
+      "f1": 0.605,
+      "pitchExact": 0.105,
+      "pitchClass": 0.105
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 225,
+      "made": 189,
+      "recall": 0.564,
+      "precision": 0.672,
+      "f1": 0.614,
+      "pitchExact": 0.205,
+      "pitchClass": 0.205
+     },
+     "baselinePpq": 480
+    },
+    "lead": {
+     "service": {
+      "true": 78,
+      "made": 73,
+      "recall": 0.269,
+      "precision": 0.288,
+      "f1": 0.278,
+      "pitchExact": 0.667,
+      "pitchClass": 0.81
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 78,
+      "made": 76,
+      "recall": 0.308,
+      "precision": 0.316,
+      "f1": 0.312,
+      "pitchExact": 0.667,
+      "pitchClass": 0.792
+     },
+     "baselinePpq": 480
+    }
+   }
+  },
+  {
+   "case": "wakeup",
+   "template": "hitech-ref-wakeup",
+   "start": 18.0,
+   "length": 25.0,
+   "bpm": 200,
+   "quantize": "1/16",
+   "seed": 42,
+   "wallSeconds": 11.67,
+   "serviceMidi": "D:\\AIcore-coord-scratch\\s2\\final\\wakeup\\transcription.mid",
+   "serviceMidiSha256": "fc65fbfce5a7cb06002c5912d3618ef8984b0eef4c2018d61d7b02ca779d77b9",
+   "parts": {
+    "kick": {
+     "service": {
+      "true": 85,
+      "made": 67,
+      "recall": 0.788,
+      "precision": 1.0,
+      "f1": 0.882,
+      "pitchExact": 1.0,
+      "pitchClass": 1.0
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 85,
+      "made": 77,
+      "recall": 0.906,
+      "precision": 1.0,
+      "f1": 0.951,
+      "pitchExact": 1.0,
+      "pitchClass": 1.0
+     },
+     "baselinePpq": 480
+    },
+    "bass": {
+     "service": {
+      "true": 245,
+      "made": 105,
+      "recall": 0.257,
+      "precision": 0.6,
+      "f1": 0.36,
+      "pitchExact": 0.444,
+      "pitchClass": 0.444
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 245,
+      "made": 81,
+      "recall": 0.159,
+      "precision": 0.481,
+      "f1": 0.239,
+      "pitchExact": 0.462,
+      "pitchClass": 0.462
+     },
+     "baselinePpq": 480
+    },
+    "lead": {
+     "service": {
+      "true": 30,
+      "made": 95,
+      "recall": 0.9,
+      "precision": 0.284,
+      "f1": 0.432,
+      "pitchExact": 0.0,
+      "pitchClass": 1.0
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 30,
+      "made": 93,
+      "recall": 0.9,
+      "precision": 0.29,
+      "f1": 0.439,
+      "pitchExact": 0.0,
+      "pitchClass": 1.0
+     },
+     "baselinePpq": 480
+    }
+   }
+  },
+  {
+   "case": "t1",
+   "template": "hitech-t1-v1",
+   "start": 61.7,
+   "length": 25.0,
+   "bpm": 210.0,
+   "quantize": "1/16",
+   "seed": 42,
+   "wallSeconds": 11.2,
+   "serviceMidi": "D:\\AIcore-coord-scratch\\s2\\final\\t1\\transcription.mid",
+   "serviceMidiSha256": "7e0e105c6f4d837fa0572848063deaf3733de9b5b868611083fe9bbe66f9008c",
+   "parts": {
+    "kick": {
+     "service": {
+      "true": 91,
+      "made": 86,
+      "recall": 0.945,
+      "precision": 1.0,
+      "f1": 0.972,
+      "pitchExact": 1.0,
+      "pitchClass": 1.0
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 91,
+      "made": 86,
+      "recall": 0.945,
+      "precision": 1.0,
+      "f1": 0.972,
+      "pitchExact": 1.0,
+      "pitchClass": 1.0
+     },
+     "baselinePpq": 480
+    },
+    "bass": {
+     "service": {
+      "true": 262,
+      "made": 213,
+      "recall": 0.698,
+      "precision": 0.859,
+      "f1": 0.771,
+      "pitchExact": 0.011,
+      "pitchClass": 0.011
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 262,
+      "made": 205,
+      "recall": 0.691,
+      "precision": 0.883,
+      "f1": 0.775,
+      "pitchExact": 0.011,
+      "pitchClass": 0.011
+     },
+     "baselinePpq": 480
+    },
+    "lead": {
+     "service": {
+      "true": 636,
+      "made": 22,
+      "recall": 0.031,
+      "precision": 0.909,
+      "f1": 0.061,
+      "pitchExact": 0.0,
+      "pitchClass": 0.45
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 636,
+      "made": 32,
+      "recall": 0.047,
+      "precision": 0.938,
+      "f1": 0.09,
+      "pitchExact": 0.0,
+      "pitchClass": 0.333
+     },
+     "baselinePpq": 480
+    }
+   }
+  },
+  {
+   "case": "t2",
+   "template": "hitech-t2-v1",
+   "start": 23.9,
+   "length": 25.0,
+   "bpm": 210.0,
+   "quantize": "1/16",
+   "seed": 42,
+   "wallSeconds": 11.41,
+   "serviceMidi": "D:\\AIcore-coord-scratch\\s2\\final\\t2\\transcription.mid",
+   "serviceMidiSha256": "b81d48ece2aa733ac27fb4fdc9f4ecf909b19b928972adb872a1a3be305f4782",
+   "parts": {
+    "kick": {
+     "service": {
+      "true": 196,
+      "made": 74,
+      "recall": 0.357,
+      "precision": 0.946,
+      "f1": 0.519,
+      "pitchExact": 1.0,
+      "pitchClass": 1.0
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 196,
+      "made": 70,
+      "recall": 0.347,
+      "precision": 0.971,
+      "f1": 0.511,
+      "pitchExact": 1.0,
+      "pitchClass": 1.0
+     },
+     "baselinePpq": 480
+    },
+    "bass": {
+     "service": {
+      "true": 322,
+      "made": 248,
+      "recall": 0.581,
+      "precision": 0.754,
+      "f1": 0.656,
+      "pitchExact": 0.963,
+      "pitchClass": 0.963
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 322,
+      "made": 248,
+      "recall": 0.581,
+      "precision": 0.754,
+      "f1": 0.656,
+      "pitchExact": 0.973,
+      "pitchClass": 0.973
+     },
+     "baselinePpq": 480
+    },
+    "lead": {
+     "service": {
+      "true": 501,
+      "made": 112,
+      "recall": 0.162,
+      "precision": 0.723,
+      "f1": 0.264,
+      "pitchExact": 0.605,
+      "pitchClass": 0.63
+     },
+     "servicePpq": 960,
+     "baseline": {
+      "true": 501,
+      "made": 111,
+      "recall": 0.18,
+      "precision": 0.811,
+      "f1": 0.294,
+      "pitchExact": 0.589,
+      "pitchClass": 0.689
+     },
+     "baselinePpq": 480
+    }
+   }
+  }
+ ]
+}

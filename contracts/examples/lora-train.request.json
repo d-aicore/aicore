@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "1.0",
+  "requestId": "syn-req-lora-0002",
+  "profile": "lora",
+  "operation": "train",
+  "params": {},
+  "inputs": [
+    {
+      "role": "dataset_manifest",
+      "path": "D:/AICORE-synthetic/jobs/syn-lora-0001/out/dataset-manifest.json",
+      "sha256": "cec0586c2f7501267683ce2d23e43dd8279ce023bc464a5b11bb0d47759778cf"
+    },
+    {
+      "role": "examples",
+      "path": "D:/AICORE-synthetic/jobs/syn-lora-0001/out/examples.jsonl",
+      "sha256": "2d86774a79c73876e8eb26f644886b125d6ee43da89563eab72bb41b6e7837b3"
+    },
+    {
+      "role": "recipe",
+      "path": "D:/AICORE-synthetic/jobs/recipes/qwen3-4b-qlora-probe.recipe.json",
+      "sha256": "5859d062e0af58faa1a13a20e2c3557516a7f29b7ea43e163ee1d74f1ee50245"
+    }
+  ],
+  "outputDir": "D:/AICORE-synthetic/jobs/syn-lora-0002/out",
+  "synthetic": false
+}

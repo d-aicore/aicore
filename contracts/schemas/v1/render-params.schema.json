@@ -1,0 +1,315 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aicore.local/schemas/v1/render-params.schema.json",
+  "title": "S5 render-by-plugin parameters (profile render, operation render): one .mid through one VST3 instrument (+ optional effects), offline, plugins from AICore's own scanned list only",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "plugin": {
+      "allOf": [
+        {
+          "$ref": "media-format.schema.json#/$defs/absolutePath"
+        },
+        {
+          "type": "string",
+          "pattern": "\\.[vV][sS][tT]3$"
+        }
+      ],
+      "$comment": "Absolute path of the .vst3. Must be in AICore's own plugin list (aicore-render scan -> %APPDATA%/AICore-C/plugins.json), not quarantined. Nothing is read from the Core."
+    },
+    "pluginState": {
+      "$ref": "media-format.schema.json#/$defs/absolutePath",
+      "$comment": "Optional file with the plugin state blob (JUCE getStateInformation bytes) to load before rendering; absent = the plugin's default patch."
+    },
+    "sampleRate": {
+      "enum": [
+        44100,
+        48000,
+        96000
+      ],
+      "default": 44100
+    },
+    "blockSize": {
+      "type": "integer",
+      "minimum": 32,
+      "maximum": 4096,
+      "default": 512
+    },
+    "tailSeconds": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 30,
+      "default": 2,
+      "$comment": "Seconds rendered after the last MIDI event (release/reverb tails)."
+    },
+    "lengthSeconds": {
+      "anyOf": [
+        {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 600
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "$comment": "Fixed output length; null = MIDI length + tailSeconds."
+    },
+    "gainDb": {
+      "type": "number",
+      "minimum": -60,
+      "maximum": 12,
+      "default": 0
+    },
+    "pluginStateBase64": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 1500000,
+      "$comment": "Standard base64 of getStateInformation (the same encoding the Core uses). Exclusive with pluginState: sending both is refused (SCHEMA_INVALID)."
+    },
+    "effects": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "plugin": {
+            "allOf": [
+              {
+                "$ref": "media-format.schema.json#/$defs/absolutePath"
+              },
+              {
+                "type": "string",
+                "pattern": "\\.[vV][sS][tT]3$"
+              }
+            ]
+          },
+          "pluginStateBase64": {
+            "type": "string",
+            "minLength": 4,
+            "maxLength": 1500000
+          }
+        },
+        "required": [
+          "plugin"
+        ]
+      },
+      "$comment": "Effect chain after the instrument, in order. Same list rule."
+    },
+    "role": {
+      "enum": [
+        "bass",
+        "lead",
+        "pad",
+        "pluck",
+        "riser",
+        "drums"
+      ],
+      "$comment": "Instrument by role: the plugin chosen in AICore's Definicoes (%APPDATA%/AICore-C/roles.json). Exclusive with plugin."
+    },
+    "effectRoles": {
+      "type": "array",
+      "maxItems": 5,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "reverb",
+          "delay",
+          "filter",
+          "sidechain",
+          "drive"
+        ]
+      },
+      "$comment": "Effects by role (AICore's roles.json), appended after explicit effects."
+    },
+    "engine": {
+      "enum": [
+        "vst3",
+        "vita",
+        "sampler",
+        "sfizz"
+      ],
+      "default": "vst3",
+      "$comment": "vst3 = aicore-render (native host); sampler = aicore-render's own sampler (params.kit); vita = services/vita (Vital engine in Python). A service refuses an engine it does not run (UNSUPPORTED_OPERATION)."
+    },
+    "preset": {
+      "$ref": "media-format.schema.json#/$defs/absolutePath",
+      "$comment": "engine vita: a .vital preset (JSON); absent = init preset."
+    },
+    "sfz": {
+      "$ref": "media-format.schema.json#/$defs/absolutePath",
+      "$comment": "engine sfizz: an .sfz kit played by sfizz_render; the dry audio then goes through effects/effectRoles."
+    },
+    "kit": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 128,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "note": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 127
+          },
+          "sample": {
+            "allOf": [
+              {
+                "$ref": "media-format.schema.json#/$defs/absolutePath"
+              },
+              {
+                "type": "string",
+                "pattern": "\\.[wW][aA][vV]$"
+              }
+            ]
+          }
+        },
+        "required": [
+          "note",
+          "sample"
+        ]
+      },
+      "$comment": "engine sampler: one WAV per MIDI note (one-shot drum hits). AICore's own sampler, not the Core's."
+    },
+    "tracks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 128
+      },
+      "$comment": "Only the notes of these MIDI tracks (by track name, e.g. the S2 tracks kick/bass/lead); absent = all tracks. A name not in the file -> UNSUPPORTED_FORMAT."
+    }
+  },
+  "required": [
+    "sampleRate",
+    "blockSize",
+    "tailSeconds"
+  ],
+  "$comment": "Inputs (service-task-request, profile render): exactly one. Either one midi played by an instrument (plugin, role, or engine sampler/sfizz/vita), or one audio through effects only (effects or effectRoles, no instrument field). aicore-render runs vst3/sampler/sfizz; services/vita runs vita.",
+  "allOf": [
+    {
+      "$comment": "plugin and role are exclusive",
+      "if": {
+        "required": [
+          "plugin"
+        ]
+      },
+      "then": {
+        "properties": {
+          "role": false
+        }
+      }
+    },
+    {
+      "$comment": "pluginState and pluginStateBase64 are exclusive",
+      "if": {
+        "required": [
+          "pluginState"
+        ]
+      },
+      "then": {
+        "properties": {
+          "pluginStateBase64": false
+        }
+      }
+    },
+    {
+      "$comment": "engine sampler: params.kit, no plugin/role/sfz/preset",
+      "if": {
+        "properties": {
+          "engine": {
+            "enum": [
+              "sampler"
+            ]
+          }
+        },
+        "required": [
+          "engine"
+        ]
+      },
+      "then": {
+        "required": [
+          "kit"
+        ],
+        "properties": {
+          "plugin": false,
+          "role": false,
+          "sfz": false,
+          "preset": false
+        }
+      },
+      "else": {
+        "properties": {
+          "kit": false
+        }
+      }
+    },
+    {
+      "$comment": "engine sfizz: params.sfz, no plugin/role/kit/tracks/preset",
+      "if": {
+        "properties": {
+          "engine": {
+            "enum": [
+              "sfizz"
+            ]
+          }
+        },
+        "required": [
+          "engine"
+        ]
+      },
+      "then": {
+        "required": [
+          "sfz"
+        ],
+        "properties": {
+          "plugin": false,
+          "role": false,
+          "kit": false,
+          "tracks": false,
+          "preset": false
+        }
+      },
+      "else": {
+        "properties": {
+          "sfz": false
+        }
+      }
+    },
+    {
+      "$comment": "engine vita: optional .vital preset, no plugin/role/kit/sfz",
+      "if": {
+        "properties": {
+          "engine": {
+            "enum": [
+              "vita"
+            ]
+          }
+        },
+        "required": [
+          "engine"
+        ]
+      },
+      "then": {
+        "properties": {
+          "plugin": false,
+          "role": false,
+          "kit": false,
+          "sfz": false
+        }
+      },
+      "else": {
+        "properties": {
+          "preset": false
+        }
+      }
+    }
+  ]
+}

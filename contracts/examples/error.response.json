@@ -1,0 +1,11 @@
+{
+  "code": "BROKEN_REFERENCE",
+  "message": "Input referenciado nao existe: D:/AICORE-synthetic/jobs/syn-0004/missing.wav",
+  "requestId": "syn-req-0004",
+  "retryable": false,
+  "details": {
+    "role": "mix",
+    "path": "D:/AICORE-synthetic/jobs/syn-0004/missing.wav",
+    "synthetic": true
+  }
+}

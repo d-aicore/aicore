@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "requestId": "syn-req-lora-0001",
+  "profile": "lora",
+  "operation": "dataset",
+  "params": {
+    "datasetId": "syn-lora",
+    "approvedBy": "syn-owner",
+    "attestedBy": "syn-owner",
+    "seed": 20261104,
+    "allowSyntheticSources": true
+  },
+  "inputs": [
+    {
+      "role": "memory_package",
+      "path": "D:/AICORE-synthetic/jobs/syn-lora-0001/memory.zip",
+      "sha256": "81ced71289a77d8e6a4c32f667062f861e9faced19cf2077378407e159bef575",
+      "bytes": 18432
+    }
+  ],
+  "outputDir": "D:/AICORE-synthetic/jobs/syn-lora-0001/out",
+  "synthetic": true
+}

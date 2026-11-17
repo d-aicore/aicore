@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "1.0",
+  "contract": "aicore.service/1",
+  "taskId": "syn-task-0001",
+  "requestId": "syn-req-0001",
+  "profile": "midi",
+  "operation": "transcribe",
+  "createdAt": "2026-11-16T12:00:20Z",
+  "service": {
+    "name": "midi-sim",
+    "version": "sim-1.1.0"
+  },
+  "params": {
+    "ppq": 960,
+    "quantize": "1/16",
+    "parts": [
+      "drums",
+      "bass",
+      "other"
+    ],
+    "kickNote": 36,
+    "bassMono": true,
+    "bpm": 145,
+    "bpmSource": "provided",
+    "leadFilter": true,
+    "splitOnOnsets": true,
+    "includeStems": true,
+    "startSeconds": 0,
+    "lengthSeconds": 8,
+    "seed": 42
+  },
+  "inputs": [
+    {
+      "role": "mix",
+      "path": "D:/AICORE-synthetic/jobs/syn-0001/mix.wav",
+      "bytes": 1411244,
+      "sha256": "17da4807d07b709d684abfc2d6d98573e8c587e1e9227ef60974d798c8fe7674"
+    }
+  ],
+  "outputs": [
+    {
+      "role": "midi",
+      "path": "D:/AICORE-synthetic/jobs/syn-0001/out/transcription.mid",
+      "bytes": 1234,
+      "sha256": "949a72035e1c059f430b6fc64a6d41487b43ecf538ba36a4237dd9b3af6e5de9",
+      "format": {
+        "container": "midi",
+        "smfType": 1,
+        "ppq": 960,
+        "tracks": 3,
+        "durationSeconds": 8.0,
+        "bytes": 1234
+      }
+    },
+    {
+      "role": "stem_bass",
+      "path": "D:/AICORE-synthetic/jobs/syn-0001/out/stem-bass.wav",
+      "bytes": 2822444,
+      "sha256": "8216bb928586fbd5fa6246589d2a843e94e0258081458d485183aeb1cfa1a954",
+      "format": {
+        "container": "wav",
+        "encoding": "float32",
+        "sampleRate": 44100,
+        "channels": 2,
+        "durationSeconds": 8.0,
+        "bytes": 2822444
+      }
+    },
+    {
+      "role": "report",
+      "path": "D:/AICORE-synthetic/jobs/syn-0001/out/report.json",
+      "bytes": 512,
+      "sha256": "9193d9c8bae74ed4f17fe02233f599d1709c2c97ae58cf2c58b1d49a9398b08d",
+      "format": {
+        "container": "json",
+        "bytes": 512
+      }
+    }
+  ],
+  "metrics": {
+    "synthetic": true,
+    "onsetsDetected": 16,
+    "notesWritten": 42,
+    "mergedEvents": 0,
+    "gridTicks": 240,
+    "ppq": 960,
+    "bpmUsed": 145,
+    "wallSeconds": 19.0
+  },
+  "validation": "unreviewed",
+  "synthetic": true
+}

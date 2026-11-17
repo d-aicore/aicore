@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0",
+  "contract": "aicore.service/1",
+  "service": {
+    "name": "midi-sim",
+    "version": "sim-1.1.0",
+    "pid": 4242
+  },
+  "profiles": [
+    {
+      "name": "midi",
+      "operations": ["transcribe"]
+    }
+  ],
+  "limits": {
+    "maxInputBytes": 134217728,
+    "maxOutputBytes": 8388608,
+    "maxDurationSeconds": 600,
+    "maxResponseBytes": 2097152
+  },
+  "ppq": 960,
+  "quantizeGrid": ["1/1", "1/2", "1/4", "1/8", "1/16", "1/32", "off"],
+  "authRequired": false,
+  "startedAt": "2026-11-16T12:00:00Z"
+}

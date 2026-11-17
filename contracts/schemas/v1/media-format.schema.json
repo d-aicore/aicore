@@ -1,0 +1,207 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aicore.local/schemas/v1/media-format.schema.json",
+  "title": "S1 media formats and file references (WAV / MIDI / JSON report)",
+  "$defs": {
+    "absolutePath": {
+      "type": "string",
+      "pattern": "^([A-Za-z]:[\\\\/]|/)[^\\x00-\\x1f]{1,511}$"
+    },
+    "fileRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "path": {
+          "$ref": "#/$defs/absolutePath"
+        },
+        "sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "role",
+        "path"
+      ]
+    },
+    "wavFormat": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "container": {
+          "const": "wav"
+        },
+        "encoding": {
+          "enum": [
+            "pcm16",
+            "pcm24",
+            "pcm32",
+            "float32",
+            "float64"
+          ]
+        },
+        "sampleRate": {
+          "type": "integer",
+          "minimum": 8000,
+          "maximum": 192000
+        },
+        "channels": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2
+        },
+        "durationSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 600
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 44,
+          "maximum": 134217728
+        }
+      },
+      "required": [
+        "container",
+        "encoding",
+        "sampleRate",
+        "channels",
+        "durationSeconds",
+        "bytes"
+      ]
+    },
+    "midiFormat": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "container": {
+          "const": "midi"
+        },
+        "smfType": {
+          "enum": [
+            0,
+            1
+          ]
+        },
+        "ppq": {
+          "const": 960,
+          "$comment": "Ruling S1b: published MIDI is PPQ 960, like the Core DAW templates."
+        },
+        "tracks": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 64
+        },
+        "durationSeconds": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 600
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 26,
+          "maximum": 8388608
+        }
+      },
+      "required": [
+        "container",
+        "smfType",
+        "ppq",
+        "tracks",
+        "durationSeconds",
+        "bytes"
+      ]
+    },
+    "reportFormat": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "container": {
+          "const": "json"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 2097152
+        }
+      },
+      "required": [
+        "container",
+        "bytes"
+      ]
+    },
+    "outputRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "path": {
+          "$ref": "#/$defs/absolutePath"
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sha256": {
+          "$ref": "common.schema.json#/$defs/sha256"
+        },
+        "format": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/wavFormat"
+            },
+            {
+              "$ref": "#/$defs/midiFormat"
+            },
+            {
+              "$ref": "#/$defs/reportFormat"
+            },
+            {
+              "$ref": "#/$defs/dataFormat"
+            }
+          ]
+        }
+      },
+      "required": [
+        "role",
+        "path",
+        "bytes",
+        "sha256",
+        "format"
+      ]
+    },
+    "dataFormat": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "container": {
+          "const": "jsonl"
+        },
+        "records": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "bytes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 134217728
+        }
+      },
+      "required": [
+        "container",
+        "records",
+        "bytes"
+      ]
+    }
+  }
+}

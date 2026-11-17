@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "1.0",
+  "requestId": "syn-req-0008",
+  "profile": "render",
+  "operation": "render",
+  "params": {
+    "plugin": "C:/Program Files/Common Files/VST3/Serum2.vst3",
+    "sampleRate": 44100,
+    "blockSize": 512,
+    "tailSeconds": 2,
+    "lengthSeconds": null,
+    "gainDb": 0
+  },
+  "inputs": [
+    {
+      "role": "midi",
+      "path": "D:/AICORE-synthetic/jobs/syn-0008/transcription.mid",
+      "sha256": "d6f50df2bf8f36907330f7f9bf16fb3191dcefc72876b0342710c7a24830c058",
+      "bytes": 3178
+    }
+  ],
+  "outputDir": "D:/AICORE-synthetic/jobs/syn-0008/out",
+  "synthetic": true
+}

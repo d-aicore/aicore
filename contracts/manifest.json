@@ -1,0 +1,197 @@
+{
+  "schemaVersion": "1.0",
+  "contract": "aicore.service/1",
+  "generatedAt": "2026-11-16T12:54:07Z",
+  "baseCommit": "4b11251bdeeb3171c6e18578e4bd7e9a7cdbd280",
+  "vendoredFrom": {
+    "repo": "AICORE (D:/AIcore-new, READ-ONLY)",
+    "commit": "500bec884404ed4745c3cef1e92e4aa4360ee578",
+    "files": [
+      {
+        "name": "common.schema.json",
+        "sha256": "69e89b07340e888da44ee863a0acd7e4abe34773c5325a27b6668a6cbfeb1457"
+      },
+      {
+        "name": "error.schema.json",
+        "sha256": "a50fbf8119356f4e055a0c3f167cba4c787a62acfd370659c5df270f4b1a574c"
+      }
+    ]
+  },
+  "files": [
+    {
+      "path": "CONTRACT.md",
+      "bytes": 41670,
+      "sha256": "4963f0210d57ab20a61e915cb7d185949d08abb79a20a91cf8658bb0773f4125"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2247,
+      "sha256": "95b8a827bcc706f4af402893b491db5ab325994257388288bc03f2de752c363e"
+    },
+    {
+      "path": "cli.md",
+      "bytes": 1116,
+      "sha256": "06305ba9c3d96837ed839da6226a2d141106f9dd41e6e65c2c22dad6aa29b0e2"
+    },
+    {
+      "path": "examples/README.md",
+      "bytes": 2852,
+      "sha256": "4395a18d28623ed2e80622f9fb53b5008e7328d81514010f1917d7bd76e6f1ac"
+    },
+    {
+      "path": "examples/error.response.json",
+      "bytes": 300,
+      "sha256": "e3c7cc13681993f08da4ce53acfadd7906d0cf0a8c16233d2e7d44f70932ee1d"
+    },
+    {
+      "path": "examples/hello.response.json",
+      "bytes": 535,
+      "sha256": "87cf1c0cde3ba1678d5ae784222a98d6cbc46fb35e272536cb225aaf78f8766d"
+    },
+    {
+      "path": "examples/jsonl-error.json",
+      "bytes": 387,
+      "sha256": "2724f9edd249a94c92976be2a71bf2167c38b6f74b2e54733ed40917f087573a"
+    },
+    {
+      "path": "examples/jsonl-transcript.jsonl",
+      "bytes": 3001,
+      "sha256": "e914f0621b157ac52a7c8a29ddf1a3a64d10d2c5d82ec9ab5fc6268d16f925c4"
+    },
+    {
+      "path": "examples/lora-dataset.request.json",
+      "bytes": 595,
+      "sha256": "4c849a7bf3d6e5f0ada4f589bec8b003c4231d3101a56f6f3b134e043e71fc6b"
+    },
+    {
+      "path": "examples/lora-train.failed.jsonl",
+      "bytes": 1258,
+      "sha256": "c6b5cd04ae5f0f744923d7b7e59da5c83a27c37755077ab0d2fcb2fb6a2a0f73"
+    },
+    {
+      "path": "examples/lora-train.request.json",
+      "bytes": 839,
+      "sha256": "ef6465d2a9aed0aaade101e415faf0af23eb63757dbe3fa84ae8fe15dcf47b68"
+    },
+    {
+      "path": "examples/midi-task.failed.jsonl",
+      "bytes": 1078,
+      "sha256": "6b92ce741111d6fb82c59250348205905a0f39ced4bc598507f4953fc2d1a9cc"
+    },
+    {
+      "path": "examples/midi-task.request.json",
+      "bytes": 731,
+      "sha256": "95b8fbaf41533783861377b096d96bf1a5baa606f75ce633f176356ecaa53387"
+    },
+    {
+      "path": "examples/midi-task.roll32.request.json",
+      "bytes": 740,
+      "sha256": "ac85160cb1dd19ecb177001087bb173e28d38c2ed977f22b37bc914cca51d2b2"
+    },
+    {
+      "path": "examples/render-audio.request.json",
+      "bytes": 442,
+      "sha256": "bfa7cd53c274ba9b1d1c92882bb895df44118e7a0b41e2e6e58d40e164e6dc65"
+    },
+    {
+      "path": "examples/render.request.json",
+      "bytes": 606,
+      "sha256": "311d04dc19ffbe353fcc7e436e6f89826639d21cd40ef46c8bd0247a0e3e4c18"
+    },
+    {
+      "path": "examples/task-manifest.json",
+      "bytes": 2199,
+      "sha256": "47ebb027ac3cf6635564346cd0cf1d644ba7c6f6f5a729966c6d09ef1d58f7ab"
+    },
+    {
+      "path": "schemas/v1/common.schema.json",
+      "bytes": 3063,
+      "sha256": "69e89b07340e888da44ee863a0acd7e4abe34773c5325a27b6668a6cbfeb1457"
+    },
+    {
+      "path": "schemas/v1/contract-manifest.schema.json",
+      "bytes": 2723,
+      "sha256": "b1d5b9b28890aea57daee56abdb08062d69c0c530de6dea9b496357c9de992da"
+    },
+    {
+      "path": "schemas/v1/error.schema.json",
+      "bytes": 789,
+      "sha256": "a50fbf8119356f4e055a0c3f167cba4c787a62acfd370659c5df270f4b1a574c"
+    },
+    {
+      "path": "schemas/v1/media-format.schema.json",
+      "bytes": 4472,
+      "sha256": "8618f0d3fc46508587177ac59a8c9c0485165bc65fce523ed26ad09558bae679"
+    },
+    {
+      "path": "schemas/v1/midi-params.schema.json",
+      "bytes": 2247,
+      "sha256": "cf539858dbfd266a9022f10086e2649aa2aaaa4755deb626a41b0fb6fe106f59"
+    },
+    {
+      "path": "schemas/v1/render-params.schema.json",
+      "bytes": 8094,
+      "sha256": "e94a10c45fe09ee4f068cc01a236eadb416f1ef0cb6277ecb99ca136c151adf1"
+    },
+    {
+      "path": "schemas/v1/service-event.schema.json",
+      "bytes": 6282,
+      "sha256": "0916e4092fd45a9ae26d53059a7018613bc796fec89b57e3424bc9b228ec1e6c"
+    },
+    {
+      "path": "schemas/v1/service-hello.schema.json",
+      "bytes": 3076,
+      "sha256": "77f99039108b56f25c63c1fb254292d5ba3de3e48bc9f4fb24c23e561729f34f"
+    },
+    {
+      "path": "schemas/v1/service-task-request.schema.json",
+      "bytes": 5562,
+      "sha256": "5b66ece88d3ea08aedb0e4e9bba79295ccac6afb628c170aad0c89e53326cb54"
+    },
+    {
+      "path": "schemas/v1/task-manifest.schema.json",
+      "bytes": 2830,
+      "sha256": "72efbce51849cc36c54272ea491dda2370fa0b73e5bca49c7b91641126a46f14"
+    },
+    {
+      "path": "sim/README.md",
+      "bytes": 5130,
+      "sha256": "d8d9b884571251ebbb2bce5186eee05ffefaa72f204b5f71c0397763e122883e"
+    },
+    {
+      "path": "sim/client.py",
+      "bytes": 2592,
+      "sha256": "0014a1d0a6113c9415d381738c6824ea011ac174605a99668ddd4b8ede54a89a"
+    },
+    {
+      "path": "sim/gate.py",
+      "bytes": 52100,
+      "sha256": "e0227b2d9264c69b200d15486830d475b8563b4108aabd922854059a56b59ca5"
+    },
+    {
+      "path": "sim/jsonschema_mini.py",
+      "bytes": 10342,
+      "sha256": "b2f71082ff4ce012655e48223e80b3140eb38fd7156c7064453ed9e833e6325a"
+    },
+    {
+      "path": "sim/make_manifest.py",
+      "bytes": 5761,
+      "sha256": "87889b77e6cfaba41ce0a35199dce35bc7306f3d9e76c171185ca7f0bd3e98a4"
+    },
+    {
+      "path": "sim/media.py",
+      "bytes": 22771,
+      "sha256": "b5ca3a79b2a83c9e2bcd35b26fcd77d4e2ee2ecd988d88c03fb0df4ca2c8ea47"
+    },
+    {
+      "path": "sim/service_sim.py",
+      "bytes": 28027,
+      "sha256": "eef596a426eca689831e88a936646785ddbff8340263625b253fdec3d07632f4"
+    }
+  ],
+  "counts": {
+    "schemas": 10,
+    "examples": 14,
+    "sim": 6
+  }
+}

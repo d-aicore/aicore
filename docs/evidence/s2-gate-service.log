@@ -1,0 +1,29 @@
+# S2 service gate — 2026-11-16T03:12:51Z — python 3.11.18 (D:\AICore\uv-python) + PYTHONPATH midi-maker venv
+$ python services/midi/gate_service.py
+S2 service gate — aicore_midi_service.py — python 3.11.18 — mode=FULL
+fixture: D:\AI Dev\flamingo-teste\templates\hitech-t1-v1.wav (61.7 s +6 s)
+[OK ] S01 hello (positive) - aicore-midi s2-0.1.0 ppq 960 grid to 1/32
+[OK ] S02 happy path: request -> progress -> .mid PPQ 960 on 1/32 (positive) - exit 0, 17 lines, outputs ['midi', 'report', 'stem_bass', 'stem_drums', 'stem_other'], 67 notes all on 120-tick grid, 47 lengths not multiple of 120 (measured), sha 47a3dc78afd14ce4
+[OK ] S03 happy path: request -> progress -> typed error (positive) - start + 2 progress -> error BACKEND_FAILED, exit 2, outputDir empty
+[OK ] S04 bad requests -> typed errors (failure-path) - 10 bad requests -> typed error + exit 2
+[OK ] S05 seeded determinism + grid moves the bytes (positive) - same request -> same sha 47a3dc78afd14ce4; 1/16 -> f2d863b5d2339836 on 240-tick grid
+[OK ] S06 tampered .mid must be caught (canary) - flipped one byte of the published .mid
+[OK ] S07 stdout pollution must be caught (canary) - library print on stdout (the bug this gate caught)
+------------------------------------------------------------------------
+scenarios 7/7 pass | canaries detected 2/2 | stdout lines 66
+exit=0
+
+$ python services/midi/gate_service.py --noop
+S2 service gate — aicore_midi_service.py — python 3.11.18 — mode=NOOP-CONTROL
+fixture: D:\AI Dev\flamingo-teste\templates\hitech-t1-v1.wav (61.7 s +6 s)
+[OK ] S01 hello (positive) - aicore-midi s2-0.1.0 ppq 960 grid to 1/32
+[OK ] S02 happy path: request -> progress -> .mid PPQ 960 on 1/32 (positive) - exit 0, 17 lines, outputs ['midi', 'report', 'stem_bass', 'stem_drums', 'stem_other'], 67 notes all on 120-tick grid, 47 lengths not multiple of 120 (measured), sha 47a3dc78afd14ce4
+[OK ] S03 happy path: request -> progress -> typed error (positive) - start + 2 progress -> error BACKEND_FAILED, exit 2, outputDir empty
+[OK ] S04 bad requests -> typed errors (failure-path) - 10 bad requests -> typed error + exit 2
+[OK ] S05 seeded determinism + grid moves the bytes (positive) - same request -> same sha 47a3dc78afd14ce4; 1/16 -> f2d863b5d2339836 on 240-tick grid
+[RED] S06 tampered .mid must be caught (canary) - flipped one byte of the published .mid
+[RED] S07 stdout pollution must be caught (canary) - library print on stdout (the bug this gate caught)
+------------------------------------------------------------------------
+scenarios 5/7 pass | canaries detected 0/2 | stdout lines 66
+NOOP CONTROL: exit 1 is the REQUIRED proof that this gate can fail.
+exit=1

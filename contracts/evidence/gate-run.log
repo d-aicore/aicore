@@ -1,0 +1,63 @@
+# S1b gate run — 2026-11-16T02:48:07Z — branch slice-1b/finish (base 6ab54fa + gate/manifest)
+# python 3.14.7, CPU, stdlib only
+
+$ python contracts/sim/make_manifest.py verify
+MANIFEST OK: every listed file present, every sha256 matches, no drift
+exit=0
+
+$ python contracts/sim/gate.py
+S1b gate — contract aicore.service/1 — python 3.14.7 — mode=FULL
+workdir: C:\Users\vk_do\AppData\Local\Temp\aicore-s1b-gate-xuifkrr4
+[OK ] S01 hello: ppq 960, grid to 1/32, no auth (positive) - contract=aicore.service/1 ppq=960 grid=['1/1', '1/2', '1/4', '1/8', '1/16', '1/32', 'off']
+[OK ] S02 happy path: request -> progress -> .mid PPQ 960 + manifest (positive) - exit 0; 11 lines; ppq=960 drums=19/19 bass=26/26 mid_sha=543334b1028481be
+[OK ] S03 happy path: request -> progress -> typed error BACKEND_FAILED (positive) - start + 2 progress -> error BACKEND_FAILED retryable=false, exit 2, no outputs, staging clean
+[OK ] S04 happy path: request -> progress -> typed error OUT_OF_MEMORY (positive) - start + 4 progress -> error OUT_OF_MEMORY retryable=false, exit 2, no outputs, staging clean
+[OK ] S05 1/64 roll quantized at 1/32 loses nothing (positive) - 1/64 roll -> 1/32: 154/154 hits kept, unique (tick,pitch), 77 slots with 2 pitches, grid 120 ticks
+[OK ] S06 notes shorter than the grid stay short (positive) - 38 notes, durations 20..26 ticks (< 120 = 1/32)
+[OK ] S07 missing reference -> red typed error (failure-path) - error BROKEN_REFERENCE, exit 2 (red, never skip)
+[OK ] S08 hash mismatch -> red typed error (failure-path) - error HASH_MISMATCH, exit 2
+[OK ] S09 limits/format -> red typed errors (failure-path) - 601s->SCHEMA_INVALID; 200kHz->UNSUPPORTED_FORMAT; beyond duration->LIMIT_EXCEEDED
+[OK ] S10 schema invalid / S1 fields / bad stdin -> typed (failure-path) - 13 invalid requests -> typed error + exit 2 (incl. 4 S1 fields now refused)
+[OK ] S11 PPQ 480 refused by writer and reader (positive) - writer refuses 480; reader refuses 480 (UNSUPPORTED_FORMAT); 960 round-trips; 1/32=120, 1/16=240
+[OK ] S12 fake-success sabotage must be caught (canary) detected=True - sim claimed done without .mid on disk; file/hash checks rejected it
+[OK ] S13 wrong-sha sabotage must be caught (canary) detected=True - .mid on disk but reported sha256 is wrong; sha check rejected it
+[OK ] S14 wrong contract major refused before submit (positive) - hello contract=aicore.service/2 -> refused before submit, 0 submissions
+[OK ] S15 determinism + content moves hash (positive) - same request twice -> same sha 543334b1028481be; 150 BPM input -> 1b412a57041af530
+[OK ] S16 manifest tamper/missing must be caught (canary) detected=True - real manifest OK; tampered hash + deleted file detected in scratch copy
+[OK ] S17 validator mutations must be rejected (canary) detected=True - 13/13 mutations rejected; unknown keyword raises (fail-closed)
+[OK ] S18 all synthetic examples validate (none unmapped) (positive) - 17 synthetic example documents validated (8 files, 0 unmapped)
+[OK ] S19 deferred items documented, not deleted (positive) - 11 deferred items documented in CONTRACT.md §13 (deferred, not deleted)
+------------------------------------------------------------------------
+scenarios 19/19 pass | canaries detected 4/4 | mutations 13/13 | sim processes 30 | transcript lines 120
+report: C:\Users\vk_do\AppData\Local\Temp\aicore-s1b-gate-xuifkrr4\gate-report.json
+workdir cleaned
+exit=0
+
+$ python contracts/sim/gate.py --noop
+S1b gate — contract aicore.service/1 — python 3.14.7 — mode=NOOP-CONTROL
+workdir: C:\Users\vk_do\AppData\Local\Temp\aicore-s1b-gate-ef8g8p21
+[OK ] S01 hello: ppq 960, grid to 1/32, no auth (positive) - contract=aicore.service/1 ppq=960 grid=['1/1', '1/2', '1/4', '1/8', '1/16', '1/32', 'off']
+[OK ] S02 happy path: request -> progress -> .mid PPQ 960 + manifest (positive) - exit 0; 11 lines; ppq=960 drums=19/19 bass=26/26 mid_sha=543334b1028481be
+[OK ] S03 happy path: request -> progress -> typed error BACKEND_FAILED (positive) - start + 2 progress -> error BACKEND_FAILED retryable=false, exit 2, no outputs, staging clean
+[OK ] S04 happy path: request -> progress -> typed error OUT_OF_MEMORY (positive) - start + 4 progress -> error OUT_OF_MEMORY retryable=false, exit 2, no outputs, staging clean
+[OK ] S05 1/64 roll quantized at 1/32 loses nothing (positive) - 1/64 roll -> 1/32: 154/154 hits kept, unique (tick,pitch), 77 slots with 2 pitches, grid 120 ticks
+[OK ] S06 notes shorter than the grid stay short (positive) - 38 notes, durations 20..26 ticks (< 120 = 1/32)
+[OK ] S07 missing reference -> red typed error (failure-path) - error BROKEN_REFERENCE, exit 2 (red, never skip)
+[OK ] S08 hash mismatch -> red typed error (failure-path) - error HASH_MISMATCH, exit 2
+[OK ] S09 limits/format -> red typed errors (failure-path) - 601s->SCHEMA_INVALID; 200kHz->UNSUPPORTED_FORMAT; beyond duration->LIMIT_EXCEEDED
+[OK ] S10 schema invalid / S1 fields / bad stdin -> typed (failure-path) - 13 invalid requests -> typed error + exit 2 (incl. 4 S1 fields now refused)
+[OK ] S11 PPQ 480 refused by writer and reader (positive) - writer refuses 480; reader refuses 480 (UNSUPPORTED_FORMAT); 960 round-trips; 1/32=120, 1/16=240
+[RED] S12 fake-success sabotage must be caught (canary) detected=False - sim claimed done without .mid on disk; file/hash checks rejected it
+[RED] S13 wrong-sha sabotage must be caught (canary) detected=False - .mid on disk but reported sha256 is wrong; sha check rejected it
+[OK ] S14 wrong contract major refused before submit (positive) - hello contract=aicore.service/2 -> refused before submit, 0 submissions
+[OK ] S15 determinism + content moves hash (positive) - same request twice -> same sha 543334b1028481be; 150 BPM input -> 1b412a57041af530
+[RED] S16 manifest tamper/missing must be caught (canary) detected=False - real manifest OK; tampered hash + deleted file detected in scratch copy
+[RED] S17 validator mutations must be rejected (canary) detected=False - 0/13 mutations rejected; unknown keyword raises (fail-closed)
+[OK ] S18 all synthetic examples validate (none unmapped) (positive) - 17 synthetic example documents validated (8 files, 0 unmapped)
+[OK ] S19 deferred items documented, not deleted (positive) - 11 deferred items documented in CONTRACT.md §13 (deferred, not deleted)
+------------------------------------------------------------------------
+scenarios 15/19 pass | canaries detected 0/4 | mutations 0/13 | sim processes 30 | transcript lines 120
+report: C:\Users\vk_do\AppData\Local\Temp\aicore-s1b-gate-ef8g8p21\gate-report.json
+NOOP CONTROL: checks were no-ops; canaries NOT detected -> gate RED (it can fail). This exit 1 is the REQUIRED proof, not a regression.
+workdir cleaned
+exit=1

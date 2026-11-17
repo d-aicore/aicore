@@ -1,0 +1,36 @@
+[s0] build 
+[0/2] Re-checking globbed directories...
+[1/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_core\juce_core_CompilationTime.cpp.obj
+[2/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libjpg_2.c.obj
+[3/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libwebp_dsp_dec_avx2.c.obj
+[4/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_Sheenbidi.c.obj
+[5/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libwebp_dsp_dec_sse41.c.obj
+[6/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libwebp_dsp_enc.c.obj
+[7/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libwebp_dec.c.obj
+[8/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_core\juce_core_zlib.c.obj
+[9/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libwebp_dsp_dec.c.obj
+[10/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libwebp_dsp_enc_sse41.c.obj
+[11/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libwebp_dsp_enc_avx2.c.obj
+[12/35] Building CXX object core\CMakeFiles\aicore_core.dir\src\version.cpp.obj
+[13/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libjpg_3.c.obj
+[14/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libjpg_1.c.obj
+[15/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libwebp_utils.c.obj
+[16/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libpng.c.obj
+[17/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libwebp_sharpyuv.c.obj
+[18/35] Building CXX object core\CMakeFiles\aicore_core.dir\src\selftest.cpp.obj
+[19/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_libwebp_enc.c.obj
+[20/35] Building RC object app\CMakeFiles\AICoreC_rc_lib.dir\AICoreC_artefacts\JuceLibraryCode\AICoreC_resources.rc.res
+[21/35] Linking CXX static library core\aicore_core.lib
+[22/35] Building C object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_lunasvg.c.obj
+[23/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_events\juce_events.cpp.obj
+[24/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_data_structures\juce_data_structures.cpp.obj
+[25/35] Building CXX object app\CMakeFiles\AICoreC.dir\src\main.cpp.obj
+[26/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_gui_basics\juce_gui_basics_2.cpp.obj
+[27/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_core\juce_core.cpp.obj
+[28/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_gui_basics\juce_gui_basics_5.cpp.obj
+[29/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_gui_basics\juce_gui_basics_4.cpp.obj
+[30/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_gui_basics\juce_gui_basics_3.cpp.obj
+[31/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_gui_basics\juce_gui_basics.cpp.obj
+[32/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics.cpp.obj
+[33/35] Building CXX object app\CMakeFiles\AICoreC.dir\D_\Core-build\0.7.0-VST3-Host\_deps\juce-src\modules\juce_graphics\juce_graphics_Harfbuzz.cpp.obj
+[34/35] Linking CXX executable app\AICoreC_artefacts\Release\AICoreC.exe

@@ -1,0 +1,58 @@
+# S5b/S5c gate — 2026-11-16T05:20:15Z — clean rebuild (build dir deleted, tree clean, own JUCE) at HEAD 2669ea69d8
+$ AICoreC.exe --version
+0.1.0+2669ea69d8
+self-test exit=0
+$ python services/render/gate_render.py
+S5 render gate — D:\AICore\trabalho\tarefa-01-sampler-definicoes\build\app\aicore-render_artefacts\Release\aicore-render.exe — mode=FULL
+[OK ] S00 own scan of the supported list + roles (no Core files) (positive) - scan (supported list only): 4 files, 105 other .vst3 ignored, 5 plugins (2 instruments: ['Kick 3', 'Serum 2']), 0 quarantined, missing []; roles set bass/drums/reverb; 6 wrong role choices refused
+[OK ] S01 hello (positive) - aicore-render 0.1.0+2669ea69d8
+[OK ] S02 happy path: .mid -> Serum 2 -> render.wav (positive) - Serum 2 2.1.2: 7.41s, peak -10.8 dBFS, rms -22.2 dBFS, sha d764fadfa2140748
+[OK ] S03 happy path: .mid -> Kick 3 -> render.wav (positive) - Kick 3 1.1.6: peak -0.0 dBFS (silent before the message-thread warm-up)
+[OK ] S04 repeatability (reported) (positive) - same request twice: identical WAV (d764fadfa2140748 vs d764fadfa2140748) [reported, plugin-dependent]
+[OK ] S05 happy path: request -> progress -> typed error (positive) - start + 1 progress -> error UNSUPPORTED_FORMAT (PPQ 480), exit 2, outputDir empty
+[OK ] S06 bad requests -> typed errors (failure-path) - 18 bad requests -> typed error + exit 2
+[OK ] S09 AI path: instrument + effect by role (AICore list) (positive) - role bass -> Serum 2, effectRoles reverb -> ValhallaRoom; peak -6.5 dBFS, differs from dry
+[OK ] S11 owner's real list: Vital + Airwindows + Dragonfly, synth role by Vital (positive) - real list: ['Airwindows Consolidated', 'Dragonfly Hall Reverb', 'Dragonfly Room Reverb', 'Vital']; missing ['Geonkick']; 110 other .vst3 ignored; role bass -> Vital 1.6.4 + ['Airwindows Consolidated', 'Dragonfly Room Rev
+[OK ] S12 Vita .mid -> WAV, then drive + reverb by role (positive) - Vita 0.1.0: 16 notes, peak -8.8 dBFS -> ['Airwindows Consolidated', 'Dragonfly Room Reverb']: peak -12.1 dBFS; PPQ 480 -> UNSUPPORTED_FORMAT
+[OK ] S13 own sampler: drums from a kit of samples (positive) - kit of 2 samples, 16 hits: peak -2.3 dBFS, same sha twice (91f8a96a378408f7); 3 bad kits -> typed errors
+[OK ] S07 tampered WAV must be caught (canary) - flipped one byte of render.wav
+[OK ] S08 silent WAV must be caught (canary) - silent WAV with matching hashes
+------------------------------------------------------------------------
+scenarios 13/13 pass | canaries detected 2/2 | stdout lines 222
+exit=0
+
+$ python services/render/gate_render.py --noop
+S5 render gate — D:\AICore\trabalho\tarefa-01-sampler-definicoes\build\app\aicore-render_artefacts\Release\aicore-render.exe — mode=NOOP-CONTROL
+[OK ] S00 own scan of the supported list + roles (no Core files) (positive) - scan (supported list only): 4 files, 105 other .vst3 ignored, 5 plugins (2 instruments: ['Kick 3', 'Serum 2']), 0 quarantined, missing []; roles set bass/drums/reverb; 6 wrong role choices refused
+[OK ] S01 hello (positive) - aicore-render 0.1.0+2669ea69d8
+[OK ] S02 happy path: .mid -> Serum 2 -> render.wav (positive) - Serum 2 2.1.2: 7.41s, peak -10.8 dBFS, rms -22.2 dBFS, sha d764fadfa2140748
+[OK ] S03 happy path: .mid -> Kick 3 -> render.wav (positive) - Kick 3 1.1.6: peak -0.0 dBFS (silent before the message-thread warm-up)
+[OK ] S04 repeatability (reported) (positive) - same request twice: identical WAV (d764fadfa2140748 vs d764fadfa2140748) [reported, plugin-dependent]
+[OK ] S05 happy path: request -> progress -> typed error (positive) - start + 1 progress -> error UNSUPPORTED_FORMAT (PPQ 480), exit 2, outputDir empty
+[OK ] S06 bad requests -> typed errors (failure-path) - 18 bad requests -> typed error + exit 2
+[OK ] S09 AI path: instrument + effect by role (AICore list) (positive) - role bass -> Serum 2, effectRoles reverb -> ValhallaRoom; peak -6.5 dBFS, differs from dry
+[OK ] S11 owner's real list: Vital + Airwindows + Dragonfly, synth role by Vital (positive) - real list: ['Airwindows Consolidated', 'Dragonfly Hall Reverb', 'Dragonfly Room Reverb', 'Vital']; missing ['Geonkick']; 110 other .vst3 ignored; role bass -> Vital 1.6.4 + ['Airwindows Consolidated', 'Dragonfly Room Rev
+[OK ] S12 Vita .mid -> WAV, then drive + reverb by role (positive) - Vita 0.1.0: 16 notes, peak -8.8 dBFS -> ['Airwindows Consolidated', 'Dragonfly Room Reverb']: peak -12.1 dBFS; PPQ 480 -> UNSUPPORTED_FORMAT
+[OK ] S13 own sampler: drums from a kit of samples (positive) - kit of 2 samples, 16 hits: peak -2.3 dBFS, same sha twice (91f8a96a378408f7); 3 bad kits -> typed errors
+[RED] S07 tampered WAV must be caught (canary) - flipped one byte of render.wav
+[RED] S08 silent WAV must be caught (canary) - silent WAV with matching hashes
+------------------------------------------------------------------------
+scenarios 11/13 pass | canaries detected 0/2 | stdout lines 222
+NOOP CONTROL: exit 1 is the REQUIRED proof that this gate can fail.
+exit=1
+
+$ python contracts/sim/make_manifest.py verify
+MANIFEST OK: every listed file present, every sha256 matches, no drift
+exit=0
+$ python contracts/sim/gate.py
+------------------------------------------------------------------------
+scenarios 19/19 pass | canaries detected 4/4 | mutations 13/13 | sim processes 30 | transcript lines 120
+report: C:\Users\vk_do\AppData\Local\Temp\aicore-s1b-gate-d4dxsmvv\gate-report.json
+workdir cleaned
+exit=0
+$ python contracts/sim/gate.py --noop
+exit=1
+$ services/midi/gate_service.py
+------------------------------------------------------------------------
+scenarios 7/7 pass | canaries detected 2/2 | stdout lines 66
+exit=0

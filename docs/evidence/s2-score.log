@@ -1,0 +1,45 @@
+# S2 quality vs baseline, seed 42
+case      part   true |  svc R      P     F1     pc | base R      P     F1     pc
+remember  kick     77 |  0.805  0.756  0.780  1.000 |  0.792  0.744  0.767  1.000
+remember  bass    225 |  0.551  0.670  0.605  0.105 |  0.564  0.672  0.614  0.205
+remember  lead     78 |  0.269  0.288  0.278  0.810 |  0.308  0.316  0.312  0.792
+remember  wall 12.97 s, service .mid ppq 960 sha 60871e10e3b950ef
+wakeup    kick     85 |  0.788  1.000  0.882  1.000 |  0.906  1.000  0.951  1.000
+wakeup    bass    245 |  0.257  0.600  0.360  0.444 |  0.159  0.481  0.239  0.462
+wakeup    lead     30 |  0.900  0.284  0.432  1.000 |  0.900  0.290  0.439  1.000
+wakeup    wall 11.67 s, service .mid ppq 960 sha fc65fbfce5a7cb06
+t1        kick     91 |  0.945  1.000  0.972  1.000 |  0.945  1.000  0.972  1.000
+t1        bass    262 |  0.698  0.859  0.771  0.011 |  0.691  0.883  0.775  0.011
+t1        lead    636 |  0.031  0.909  0.061  0.450 |  0.047  0.938  0.090  0.333
+t1        wall 11.2 s, service .mid ppq 960 sha 7e0e105c6f4d837f
+t2        kick    196 |  0.357  0.946  0.519  1.000 |  0.347  0.971  0.511  1.000
+t2        bass    322 |  0.581  0.754  0.656  0.963 |  0.581  0.754  0.656  0.973
+t2        lead    501 |  0.162  0.723  0.264  0.630 |  0.180  0.811  0.294  0.689
+t2        wall 11.41 s, service .mid ppq 960 sha b81d48ece2aa733a
+report: D:\AIcore-coord-scratch\s2\final\score-1-16-seed42.json
+
+case      part   true |  svc R      P     F1     pc | base R      P     F1     pc
+remember  kick     77 |  0.805  0.738  0.770  1.000 |  0.792  0.744  0.767  1.000
+remember  bass    225 |  0.551  0.670  0.605  0.105 |  0.564  0.672  0.614  0.205
+remember  lead     78 |  0.308  0.320  0.314  0.792 |  0.308  0.316  0.312  0.792
+remember  wall 13.28 s, service .mid ppq 960 sha 25a8a1928f69ced9
+wakeup    kick     85 |  0.776  0.985  0.868  1.000 |  0.906  1.000  0.951  1.000
+wakeup    bass    245 |  0.257  0.600  0.360  0.444 |  0.159  0.481  0.239  0.462
+wakeup    lead     30 |  0.900  0.281  0.429  1.000 |  0.900  0.290  0.439  1.000
+wakeup    wall 11.8 s, service .mid ppq 960 sha 3b350bf1778aa439
+t1        kick     91 |  0.945  1.000  0.972  1.000 |  0.945  1.000  0.972  1.000
+t1        bass    262 |  0.698  0.859  0.771  0.011 |  0.691  0.883  0.775  0.011
+t1        lead    636 |  0.030  0.864  0.058  0.474 |  0.047  0.938  0.090  0.333
+t1        wall 11.39 s, service .mid ppq 960 sha 39f15d6b092879ec
+t2        kick    196 |  0.352  0.945  0.513  1.000 |  0.347  0.971  0.511  1.000
+t2        bass    322 |  0.581  0.754  0.656  0.963 |  0.581  0.754  0.656  0.973
+t2        lead    501 |  0.174  0.763  0.283  0.793 |  0.180  0.811  0.294  0.689
+t2        wall 13.66 s, service .mid ppq 960 sha f937922811a2dc1c
+report: D:\AIcore-coord-scratch\s2\final\score-1-32-seed42.json
+
+# wakeup kick/bass across Demucs seeds 1-5 (1/16)
+seed 1: kick R 0.753 F1 0.859 | bass R 0.331 F1 0.411
+seed 2: kick R 0.835 F1 0.91 | bass R 0.31 F1 0.403
+seed 3: kick R 0.871 F1 0.931 | bass R 0.282 F1 0.382
+seed 4: kick R 0.8 F1 0.889 | bass R 0.233 F1 0.333
+seed 5: kick R 0.847 F1 0.917 | bass R 0.216 F1 0.316

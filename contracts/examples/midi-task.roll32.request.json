@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "1.0",
+  "requestId": "syn-req-0002",
+  "profile": "midi",
+  "operation": "transcribe",
+  "params": {
+    "ppq": 960,
+    "quantize": "1/32",
+    "parts": [
+      "drums",
+      "bass"
+    ],
+    "kickNote": 36,
+    "bassMono": true,
+    "bpm": 145,
+    "bpmSource": "provided",
+    "leadFilter": true,
+    "splitOnOnsets": true,
+    "includeStems": false,
+    "startSeconds": 0,
+    "lengthSeconds": 4,
+    "seed": 42
+  },
+  "inputs": [
+    {
+      "role": "mix",
+      "path": "D:/AICORE-synthetic/jobs/syn-0002/mix.wav",
+      "sha256": "201727615bb3a8acddb8001680ddfbee6a2f7240ef3aa2c68970d525f3c372a0",
+      "bytes": 705644
+    }
+  ],
+  "outputDir": "D:/AICORE-synthetic/jobs/syn-0002/out",
+  "synthetic": true
+}

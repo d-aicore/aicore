@@ -1,0 +1,34 @@
+# lora — service gate — 2026-11-16T04:35:45Z — branch lora/memory-dataset rebased on 4cfbeb2 (S5)
+# python 3.12.10 (D:\AICore\python), AICORE_PY_SRC=D:\AICore\app (= D:\AIcore-new @ 500bec8), CPU
+
+$ python services/lora/gate_service.py
+lora service gate — aicore_lora_service.py — python 3.12.10 — mode=FULL
+fixture: C:\Users\vk_do\AppData\Local\Temp\aicore-lora-gate-3yggl08i\syn-lora-gate.zip (20 synthetic episodes)
+[OK ] S01 hello (positive) - aicore-lora lora-0.1.0 lora: dataset, train
+[OK ] S02 dataset: memory package -> curated examples -> group splits (positive) - exit 0, 17 lines, 20 episodes -> splits {'train': 16, 'validation': 2, 'test': 2}, datasetHash 62dd3df4c7ec9076
+[OK ] S03 train (real): request -> progress -> typed error (positive) - start + 2 progress -> error BACKEND_FAILED (no real trainer), exit 2, outputDir empty
+[OK ] S04 train (synthetic): mock trainer, verified checkpoint (positive) - mock trainer 2 step(s), loss 1.000973 -> 0.667384, synthetic
+[OK ] S05 bad requests -> typed errors (failure-path) - 15 bad requests -> typed error + exit 2
+[OK ] S06 same memory -> same dataset (positive) - same package -> same datasetHash 62dd3df4c7ec9076
+[OK ] S07 tampered examples.jsonl must be caught (canary) - flipped one byte of examples.jsonl
+[OK ] S08 stdout pollution must be caught (canary) - non-contract line on stdout
+------------------------------------------------------------------------
+scenarios 8/8 pass | canaries detected 2/2 | stdout lines 78
+exit=0
+
+$ python services/lora/gate_service.py --noop
+lora service gate — aicore_lora_service.py — python 3.12.10 — mode=NOOP-CONTROL
+fixture: C:\Users\vk_do\AppData\Local\Temp\aicore-lora-gate-8rl2k3fo\syn-lora-gate.zip (20 synthetic episodes)
+[OK ] S01 hello (positive) - aicore-lora lora-0.1.0 lora: dataset, train
+[OK ] S02 dataset: memory package -> curated examples -> group splits (positive) - exit 0, 17 lines, 20 episodes -> splits {}, datasetHash None
+[OK ] S03 train (real): request -> progress -> typed error (positive) - start + 2 progress -> error BACKEND_FAILED (no real trainer), exit 2, outputDir empty
+[OK ] S04 train (synthetic): mock trainer, verified checkpoint (positive) - mock trainer 2 step(s), loss 1.000973 -> 0.667384, synthetic
+[OK ] S05 bad requests -> typed errors (failure-path) - 15 bad requests -> typed error + exit 2
+[OK ] S06 same memory -> same dataset (positive) - same package -> same datasetHash None
+[RED] S07 tampered examples.jsonl must be caught (canary) - flipped one byte of examples.jsonl
+[RED] S08 stdout pollution must be caught (canary) - non-contract line on stdout
+------------------------------------------------------------------------
+scenarios 6/8 pass | canaries detected 0/2 | stdout lines 78
+NOOP CONTROL: exit 1 is the REQUIRED proof that this gate can fail.
+exit=1
+

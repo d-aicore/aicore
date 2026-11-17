@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aicore.local/schemas/v1/contract-manifest.schema.json",
+  "title": "S1 contract deliverable manifest (sha256 of every contract file)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "$ref": "common.schema.json#/$defs/schemaVersion"
+    },
+    "contract": {
+      "const": "aicore.service/1"
+    },
+    "generatedAt": {
+      "$ref": "common.schema.json#/$defs/timestamp"
+    },
+    "baseCommit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "vendoredFrom": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repo": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "files": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[a-z0-9-]+\\.schema\\.json$"
+              },
+              "sha256": {
+                "$ref": "common.schema.json#/$defs/sha256"
+              }
+            },
+            "required": [
+              "name",
+              "sha256"
+            ]
+          }
+        }
+      },
+      "required": [
+        "repo",
+        "commit",
+        "files"
+      ]
+    },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_./-]{0,255}$"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "sha256": {
+            "$ref": "common.schema.json#/$defs/sha256"
+          }
+        },
+        "required": [
+          "path",
+          "bytes",
+          "sha256"
+        ]
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schemas": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "examples": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "sim": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "schemas",
+        "examples",
+        "sim"
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "contract",
+    "generatedAt",
+    "baseCommit",
+    "vendoredFrom",
+    "files",
+    "counts"
+  ]
+}

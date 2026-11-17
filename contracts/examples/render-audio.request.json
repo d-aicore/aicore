@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "1.0",
+  "requestId": "syn-req-0009",
+  "profile": "render",
+  "operation": "render",
+  "params": {
+    "effectRoles": [
+      "drive",
+      "reverb"
+    ],
+    "sampleRate": 44100,
+    "blockSize": 512,
+    "tailSeconds": 2
+  },
+  "inputs": [
+    {
+      "role": "audio",
+      "path": "D:/AICORE-synthetic/jobs/syn-0009/dry.wav"
+    }
+  ],
+  "outputDir": "D:/AICORE-synthetic/jobs/syn-0009/out",
+  "synthetic": true
+}

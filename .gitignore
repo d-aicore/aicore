@@ -1,0 +1,14 @@
+# Build trees / fetched deps / IDE user files (AGENTS.md S0)
+build/
+_deps/
+*.user
+CMakeUserPresets.json
+.vs/
+
+# Python bytecode / simulator runtime artifacts (S1)
+__pycache__/
+*.pyc
+contracts/.staging-manifest/
+contracts/sim/work-*/
+# gate runtime report lives in a temp workdir; committed evidence is the captured log
+gate-report.json

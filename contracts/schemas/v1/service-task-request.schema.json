@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aicore.local/schemas/v1/service-task-request.schema.json",
+  "title": "S1b task submission (transporte unico: uma linha JSON no stdin do processo)",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "$ref": "common.schema.json#/$defs/schemaVersion"
+    },
+    "requestId": {
+      "$ref": "common.schema.json#/$defs/id"
+    },
+    "profile": {
+      "enum": [
+        "midi",
+        "stems",
+        "flamingo",
+        "lora",
+        "render"
+      ]
+    },
+    "operation": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]{0,63}$"
+    },
+    "params": {
+      "type": "object"
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": {
+        "$ref": "media-format.schema.json#/$defs/fileRef"
+      }
+    },
+    "outputDir": {
+      "$ref": "media-format.schema.json#/$defs/absolutePath"
+    },
+    "synthetic": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "requestId",
+    "profile",
+    "operation",
+    "params",
+    "inputs",
+    "outputDir"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "profile": {
+            "const": "midi"
+          }
+        },
+        "required": [
+          "profile"
+        ]
+      },
+      "then": {
+        "properties": {
+          "operation": {
+            "const": "transcribe"
+          },
+          "params": {
+            "$ref": "midi-params.schema.json"
+          },
+          "inputs": {
+            "contains": {
+              "properties": {
+                "role": {
+                  "const": "mix"
+                }
+              },
+              "required": [
+                "role"
+              ]
+            },
+            "minContains": 1,
+            "maxContains": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "profile": {
+            "const": "render"
+          }
+        },
+        "required": [
+          "profile"
+        ]
+      },
+      "then": {
+        "properties": {
+          "operation": {
+            "const": "render"
+          },
+          "params": {
+            "$ref": "render-params.schema.json"
+          },
+          "inputs": {
+            "minItems": 1,
+            "maxItems": 1,
+            "items": {
+              "properties": {
+                "role": {
+                  "enum": [
+                    "midi",
+                    "audio"
+                  ]
+                }
+              },
+              "required": [
+                "role"
+              ]
+            }
+          }
+        },
+        "oneOf": [
+          {
+            "$comment": "MIDI mode: one midi input played by an instrument (plugin, role, or engine sampler/sfizz/vita).",
+            "properties": {
+              "inputs": {
+                "contains": {
+                  "properties": {
+                    "role": {
+                      "const": "midi"
+                    }
+                  },
+                  "required": [
+                    "role"
+                  ]
+                }
+              },
+              "params": {
+                "anyOf": [
+                  {
+                    "required": [
+                      "plugin"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "role"
+                    ]
+                  },
+                  {
+                    "required": [
+                      "engine"
+                    ],
+                    "properties": {
+                      "engine": {
+                        "enum": [
+                          "sampler",
+                          "sfizz",
+                          "vita"
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "$comment": "Audio mode: one audio input through effects only; no instrument of any kind.",
+            "properties": {
+              "inputs": {
+                "contains": {
+                  "properties": {
+                    "role": {
+                      "const": "audio"
+                    }
+                  },
+                  "required": [
+                    "role"
+                  ]
+                }
+              },
+              "params": {
+                "properties": {
+                  "plugin": false,
+                  "role": false,
+                  "kit": false,
+                  "sfz": false,
+                  "preset": false,
+                  "tracks": false,
+                  "pluginState": false,
+                  "pluginStateBase64": false,
+                  "engine": {
+                    "const": "vst3"
+                  }
+                },
+                "anyOf": [
+                  {
+                    "required": [
+                      "effects"
+                    ],
+                    "properties": {
+                      "effects": {
+                        "minItems": 1
+                      }
+                    }
+                  },
+                  {
+                    "required": [
+                      "effectRoles"
+                    ],
+                    "properties": {
+                      "effectRoles": {
+                        "minItems": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

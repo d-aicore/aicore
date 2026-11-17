@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://aicore.local/schemas/v1/service-event.schema.json",
+  "title": "S1b JSON-lines event (transport unico: um objeto por linha no stdout, ASCII-only)",
+  "$defs": {
+    "serviceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ]
+    },
+    "taskResult": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "outputs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "$ref": "media-format.schema.json#/$defs/outputRef"
+          }
+        },
+        "manifestPath": {
+          "$ref": "media-format.schema.json#/$defs/absolutePath"
+        },
+        "metrics": {
+          "type": "object"
+        },
+        "validation": {
+          "enum": [
+            "unreviewed",
+            "approved",
+            "rejected"
+          ]
+        },
+        "manifestSha256": {
+          "$ref": "common.schema.json#/$defs/sha256",
+          "$comment": "sha256 of manifest.json as published; the client checks it before trusting the manifest (audit 2026-11-16). Optional in v1 (additive); every service in this repo sends it."
+        },
+        "manifestBytes": {
+          "type": "integer",
+          "minimum": 2
+        }
+      },
+      "required": [
+        "outputs",
+        "manifestPath",
+        "metrics",
+        "validation"
+      ]
+    }
+  },
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event": {
+          "const": "start"
+        },
+        "schemaVersion": {
+          "$ref": "common.schema.json#/$defs/schemaVersion"
+        },
+        "contract": {
+          "const": "aicore.service/1"
+        },
+        "taskId": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "requestId": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "profile": {
+          "enum": [
+            "midi",
+            "stems",
+            "flamingo",
+            "lora",
+            "render"
+          ]
+        },
+        "operation": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]{0,63}$"
+        },
+        "service": {
+          "$ref": "#/$defs/serviceRef"
+        },
+        "synthetic": {
+          "type": "boolean"
+        },
+        "at": {
+          "$ref": "common.schema.json#/$defs/timestamp"
+        }
+      },
+      "required": [
+        "event",
+        "schemaVersion",
+        "contract",
+        "taskId",
+        "requestId",
+        "profile",
+        "operation",
+        "service",
+        "synthetic",
+        "at"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event": {
+          "const": "progress"
+        },
+        "schemaVersion": {
+          "$ref": "common.schema.json#/$defs/schemaVersion"
+        },
+        "eventSeq": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "taskId": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "phase": {
+          "enum": [
+            "read",
+            "separate",
+            "transcribe",
+            "quantize",
+            "write",
+            "load",
+            "render",
+            "curate",
+            "split",
+            "train"
+          ]
+        },
+        "fraction": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "step": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "totalSteps": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "at": {
+          "$ref": "common.schema.json#/$defs/timestamp"
+        }
+      },
+      "required": [
+        "event",
+        "schemaVersion",
+        "eventSeq",
+        "taskId",
+        "phase",
+        "fraction",
+        "step",
+        "totalSteps",
+        "at"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event": {
+          "const": "done"
+        },
+        "schemaVersion": {
+          "$ref": "common.schema.json#/$defs/schemaVersion"
+        },
+        "contract": {
+          "const": "aicore.service/1"
+        },
+        "taskId": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "requestId": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "result": {
+          "$ref": "#/$defs/taskResult"
+        },
+        "synthetic": {
+          "type": "boolean"
+        },
+        "at": {
+          "$ref": "common.schema.json#/$defs/timestamp"
+        }
+      },
+      "required": [
+        "event",
+        "schemaVersion",
+        "contract",
+        "taskId",
+        "requestId",
+        "result",
+        "synthetic",
+        "at"
+      ]
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "event": {
+          "const": "error"
+        },
+        "schemaVersion": {
+          "$ref": "common.schema.json#/$defs/schemaVersion"
+        },
+        "contract": {
+          "const": "aicore.service/1"
+        },
+        "taskId": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "requestId": {
+          "$ref": "common.schema.json#/$defs/id"
+        },
+        "error": {
+          "$ref": "error.schema.json"
+        },
+        "at": {
+          "$ref": "common.schema.json#/$defs/timestamp"
+        }
+      },
+      "required": [
+        "event",
+        "schemaVersion",
+        "contract",
+        "taskId",
+        "requestId",
+        "error",
+        "at"
+      ]
+    }
+  ]
+}

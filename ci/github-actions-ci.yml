@@ -1,0 +1,81 @@
+# Waiting to be enabled: move this file to .github/workflows/ci.yml (needs a gh token with the workflow scope).
+# AICore-C CI: the contract gate (Linux, stdlib Python) and the Windows build + smoke tests of the native exes.
+# No GPU, no plugins, no models, no network beyond the pinned JUCE tarball.
+name: ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  contract:
+    name: contract gate (aicore.service/1)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: manifest (every contract file, sha256)
+        run: python contracts/sim/make_manifest.py verify
+      - name: gate (scenarios, canaries, mutations)
+        run: python contracts/sim/gate.py
+      - name: no-op control must fail (proof the gate can fail)
+        run: |
+          if python contracts/sim/gate.py --noop; then
+            echo "the --noop control passed: the gate cannot fail"; exit 1
+          fi
+          echo "--noop exited red, as it must"
+      - name: each audit fix undone must turn the gate red (mutation proof)
+        run: python ci/contract_mutations.py
+      - name: Vita service MIDI reader (stdlib unit tests, no vita module)
+        run: python -m unittest discover -s services/vita/tests -v
+
+  midi-maker:
+    name: MIDI maker unit tests (CPU, no models)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: dependencies
+        run: pip install numpy mido
+      - name: unit tests (services/midi/tests)
+        run: |
+          if [ ! -d services/midi/tests ]; then echo "no services/midi/tests on this branch yet"; exit 0; fi
+          python -m unittest discover -s services/midi/tests -v
+      - name: mutations must be caught (each deliberate breakage makes the suite fail)
+        run: |
+          if [ ! -f services/midi/tests/mutations.py ]; then echo "no mutation proof on this branch yet"; exit 0; fi
+          python services/midi/tests/mutations.py
+      # services/midi/gate_service.py needs Demucs + Basic Pitch: a local gate, not a cloud one
+
+  windows:
+    name: build + smoke (Windows, MSVC, Ninja)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: ilammy/msvc-dev-cmd@v1
+      - uses: seanmiddleditch/gha-setup-ninja@v5
+      - name: cache JUCE download
+        uses: actions/cache@v4
+        with:
+          path: build/_deps/juce-subbuild
+          key: juce-9.0.5-${{ runner.os }}
+      - name: configure (JUCE 9.0.5 by pinned URL + SHA256)
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+      - name: build AICoreC and aicore-render
+        run: cmake --build build --target AICoreC aicore-render aicore-render-plugin-list -j 4
+      - name: smoke tests
+        run: python ci/smoke.py build/app/AICoreC_artefacts/Release/AICoreC.exe build/app/aicore-render_artefacts/Release/aicore-render.exe build/ci-work
+      - name: keep the smoke outputs when something fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-work
+          path: build/ci-work

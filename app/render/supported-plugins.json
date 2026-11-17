@@ -1,0 +1,95 @@
+{
+  "version": 2,
+  "comment": "AICore's own copy of the AI plugin policy (owner 2026-11-16: open source only, few choices, modifiable; nothing paid; Serum 2 manual only). The scan only looks for these .vst3 files; everything else on the PC is ignored. sha256 = the downloaded file (D:/AICore/plugins/downloads).",
+  "plugins": [
+    {
+      "name": "Vital",
+      "file": "Vital.vst3",
+      "roles": [
+        "bass",
+        "lead",
+        "pad",
+        "pluck",
+        "riser"
+      ],
+      "licence": "GPL-3.0 (free version)",
+      "source": "https://github.com/mtytel/vital",
+      "download": "installed by the owner (2026-11-16, C:/Program Files/Common Files/VST3/Vital.vst3)",
+      "sha256": null,
+      "note": "final render of synth roles in aicore-render (keeps legato/glide); .vital presets are the same JSON Vita reads, so the AI can tune a preset with Vita and render it with Vital"
+    },
+    {
+      "name": "sfizz",
+      "file": "sfizz.vst3",
+      "roles": [
+        "drums"
+      ],
+      "licence": "BSD-2-Clause",
+      "source": "https://github.com/sfztools/sfizz",
+      "download": null,
+      "sha256": null,
+      "note": "drums and samples through SFZ kits built from D:/Samples. Owner OK 2026-11-16: downloaded https://github.com/sfztools/sfizz/releases/download/1.2.3/sfizz-1.2.3-win64.zip (sha256 7431cbe9b7f2e71a9ff4b12fbbe82c766dbf75b1eedecca627e7506cb06a9fcc) to D:/AICore/plugins/downloads; it holds the library and sfizz_render.exe (D:/AICore/plugins/sfizz-1.2.3-win64-lib), not the VST3. The VST3 only ships as an installer (sfztools/sfizz-ui 1.2.3, sfizz-1.2.3-win64.exe)"
+    },
+    {
+      "name": "Airwindows Consolidated",
+      "file": "Airwindows Consolidated.vst3",
+      "roles": [
+        "filter",
+        "drive",
+        "delay",
+        "sidechain"
+      ],
+      "licence": "MIT",
+      "source": "https://github.com/baconpaul/airwin2rack",
+      "download": "https://github.com/baconpaul/airwin2rack/releases/download/DAWPlugin/AirwindowsConsolidated-2026-11-15-59a227e-Windows.zip",
+      "sha256": "b2f0d0f02b8e129f56a6e6b25c62e2606105f77a283d4aa0d54766f44ec22f23",
+      "note": "~500 effects, few parameters each; the algorithm is chosen in the plugin state; one fixed effect per role (state per role: to do)"
+    },
+    {
+      "name": "Dragonfly Room Reverb",
+      "file": "DragonflyRoomReverb.vst3",
+      "roles": [
+        "reverb"
+      ],
+      "licence": "GPL-3.0",
+      "source": "https://github.com/michaelwillis/dragonfly-reverb",
+      "download": "https://github.com/michaelwillis/dragonfly-reverb/releases/download/3.2.10/dragonfly-reverb-3.2.10-win64.zip",
+      "sha256": "ca5f35f9dcd9a33f06490d3c92f04061a1a798cb81257d5ca5851bdda0824c66"
+    }
+  ],
+  "engines": [
+    {
+      "name": "Vita",
+      "kind": "python",
+      "roles": [
+        "bass",
+        "lead",
+        "pad",
+        "pluck"
+      ],
+      "licence": "GPL-3.0",
+      "source": "https://github.com/DBraun/Vita",
+      "install": "D:/AICore/plugins/vita-venv (python 3.11, pip install vita==0.1.0)",
+      "note": "Vital engine as a Python module; presets are .vital JSON. Not a VST3: rendered by its own service, never linked into aicore-render"
+    },
+    {
+      "name": "AICore sampler",
+      "kind": "native",
+      "roles": [
+        "drums"
+      ],
+      "licence": "own code (JUCE)",
+      "note": "fallback for drums when sfizz is not installed: engine 'sampler' with params.kit"
+    }
+  ],
+  "folders": [
+    "D:/AICore/plugins/vst3"
+  ],
+  "rejected": [
+    "Geonkick (no Windows version usable here)",
+    "Kick/Bass Scope",
+    "Shardgate (closed)",
+    "Dexed",
+    "Kilohearts (paid)"
+  ]
+}

@@ -1,0 +1,3 @@
+# Contract files are hashed byte-for-byte (manifest.json sha256).
+# Disable all line-ending normalization so working tree == committed bytes.
+* -text
